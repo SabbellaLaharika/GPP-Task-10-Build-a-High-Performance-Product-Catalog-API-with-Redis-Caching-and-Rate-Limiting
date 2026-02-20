@@ -10,7 +10,7 @@ const seedDatabase = async () => {
                 products.push({
                     name: `Sample Product ${i}`,
                     description: `This is the description for sample product ${i}. It is a high-quality item.`,
-                    price: (Math.random() * 100 + 10).toFixed(2),
+                    price: parseFloat((Math.random() * 100 + 10).toFixed(2)),
                     category: `Category ${i % 3 + 1}`,
                     sku: `SKU-${Date.now()}-${i}`,
                     stock: Math.floor(Math.random() * 100)
