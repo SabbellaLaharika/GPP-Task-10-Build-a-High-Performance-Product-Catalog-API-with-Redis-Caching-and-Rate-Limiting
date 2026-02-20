@@ -1,28 +1,24 @@
+version: '3.8'
 services:
   app:
-    container_name: product-api
-    image: product-api-image
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:3000" # Or your chosen API port
     environment:
-      - PORT=3000
-      - MONGODB_URI=mongodb://mongo:27017/product_catalog
-      - REDIS_URL=redis://redis:6379
-      - NODE_ENV=production
+      MONGO_URI: mongodb://mongo:27017/product_catalog
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      # ... other environment variables
     depends_on:
-      mongo:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - mongo
+      - redis
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"] # Adjust to your health check endpoint
       interval: 10s
       timeout: 5s
       retries: 5
-
   mongo:
     image: mongo:latest
     ports:
@@ -30,11 +26,10 @@ services:
     volumes:
       - mongodb_data:/data/db
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
-
   redis:
     image: redis:latest
     ports:
@@ -46,7 +41,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
 volumes:
   mongodb_data:
   redis_data:
