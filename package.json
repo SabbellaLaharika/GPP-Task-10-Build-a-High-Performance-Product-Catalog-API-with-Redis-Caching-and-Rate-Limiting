@@ -1,0 +1,25 @@
+{
+  "name": "product-catalog-api",
+  "version": "1.0.0",
+  "description": "High-Performance Product Catalog API with Redis Caching and Rate Limiting",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "joi": "^17.13.1",
+    "mongoose": "^8.3.4",
+    "morgan": "^1.10.0",
+    "redis": "^4.6.14"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.0.0"
+  }
+}

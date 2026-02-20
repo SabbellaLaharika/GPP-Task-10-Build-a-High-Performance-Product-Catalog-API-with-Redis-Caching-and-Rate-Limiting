@@ -1,0 +1,10 @@
+node_modules/
+.env
+.DS_Store
+*.log
+coverage/
+dist/
+build/
+redis_data/
+mongodb_data/
+.vscode/
